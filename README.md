@@ -23,5 +23,18 @@ Antes de programar alertas de bloqueo, se realizó un diagnóstico operativo par
 *   `/scripts_sql/`: Contiene todo el código SQL utilizado en BigQuery, comentado con enfoque de negocio.
 *   `/dashboards/`: Enlaces a los tableros gerenciales en Tableau.
 
+
+## ⚙️ Desarrollo del Motor de Reglas (Iteración Analítica)
+
+**Regla 1: Detección de "Vaciado de Cuenta" (Account Draining)**
+Se diseñó un algoritmo para detectar transacciones (`TRANSFER` y `CASH_OUT`) que dejan el saldo final de la cuenta emisora en cero. 
+
+*   **Versión 1.0 (Sin umbrales):** Detectó el 97.8% del fraude, pero generó 2.4 millones de falsos positivos. Inviable a nivel operativo.
+*   **Versión 2.0 (Sistema de Triage):** Se implementó un semáforo de riesgo segmentando por volumen de capital (Mayor a 1M, Mayor a 200k, Menor a 200k). 
+*   **Insight Operativo:** El análisis demostró que evaluar operaciones aisladas satura la capacidad operativa del equipo de revisión manual (más de 1 millón de alertas amarillas). Se determinó que el motor debe incorporar lógica de comportamiento temporal (velocidad transaccional) para reducir la tasa de falsas alarmas.
+
 ---
 *Proyecto desarrollado para simular entornos reales de toma de decisiones basadas en datos.*
+
+
+
