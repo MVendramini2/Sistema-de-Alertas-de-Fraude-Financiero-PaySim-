@@ -33,6 +33,9 @@ Se diseñó un algoritmo para detectar transacciones (`TRANSFER` y `CASH_OUT`) q
 *   **Versión 2.0 (Sistema de Triage):** Se implementó un semáforo de riesgo segmentando por volumen de capital (Mayor a 1M, Mayor a 200k, Menor a 200k). 
 *   **Insight Operativo:** El análisis demostró que evaluar operaciones aisladas satura la capacidad operativa del equipo de revisión manual (más de 1 millón de alertas amarillas). Se determinó que el motor debe incorporar lógica de comportamiento temporal (velocidad transaccional) para reducir la tasa de falsas alarmas.
 
+
+*   **Análisis Avanzado (Window Functions):** Se investigó la velocidad transaccional para identificar redes de "Cuentas Mula". Los datos demostraron una correlación inversa: la alta frecuencia de recepción es un comportamiento exclusivo de clientes legítimos. Los estafadores operan con un modelo de cuentas descartables de un solo uso. Se descartó la implementación de bloqueos por velocidad, ahorrando semanas de desarrollo innecesario y evitando el bloqueo de cuentas comerciales.
+
 ---
 *Proyecto desarrollado para simular entornos reales de toma de decisiones basadas en datos.*
 
